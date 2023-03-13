@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const images = [
   'https://i.postimg.cc/3ryH3QHW/waffles.png',
@@ -9,20 +9,31 @@ const images = [
 
 ];
 
-
-
 const Carousel = () => {
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((currentImageIndex + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(intervalId);
+  }, [currentImageIndex, images]);
 
   const handleImageClick = () => {
-    setCurrentImage(currentImage === images.length - 1 ? 0 : currentImage + 1);
+    setCurrentImageIndex((currentImageIndex + 1) % images.length);
   };
 
   return (
     <div className="carousel">
-      <img className="carousel__image" src={images[currentImage]} alt="carousel" onClick={handleImageClick} />
+      <img
+        className="carousel__image"
+        src={images[currentImageIndex]}
+        alt="carousel"
+        onClick={handleImageClick}
+      />
     </div>
   );
 };
+
 
 export default Carousel;
