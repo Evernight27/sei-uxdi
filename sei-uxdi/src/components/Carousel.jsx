@@ -23,6 +23,10 @@ const Carousel = () => {
     setCurrentImageIndex((currentImageIndex + 1) % images.length);
   };
 
+  const currentSlide = (n) => {
+    setCurrentImageIndex(n - 1);
+  };
+
   return (
     <div className="carousel">
       <img
@@ -31,9 +35,15 @@ const Carousel = () => {
         alt="carousel"
         onClick={handleImageClick}
       />
+      <div style={{ textAlign: "center" }}>
+        <span className="dot" onClick={() => currentSlide(1)}></span>
+        <span className="dot" onClick={() => currentSlide(2)}></span>
+        <span className="dot" onClick={() => currentSlide(3)}></span>
+        <span className="dot" onClick={() => currentSlide(4)}></span>
+        <span className="dot" onClick={() => currentSlide(5)}></span>
+      </div>
     </div>
   );
 };
-
 
 export default Carousel;
